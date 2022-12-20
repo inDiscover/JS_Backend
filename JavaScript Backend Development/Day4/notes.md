@@ -1,0 +1,1 @@
+Webpack birden fazla .js file alip tek paket haline getirir. Cunku browser bnunu yapamaz, yani bundle etme gorevi vardir bu kadar.
