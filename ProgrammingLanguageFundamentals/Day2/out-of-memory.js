@@ -1,0 +1,2 @@
+const dt = new Date() //* Goes into heap due to new keyword -> OOM will happen if it runs out of heap memory
+const pi = 3.14 //* Goes into stack memory -> stackowerflow will happen if it runs oit of memory

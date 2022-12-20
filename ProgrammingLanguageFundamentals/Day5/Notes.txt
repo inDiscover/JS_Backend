@@ -1,0 +1,35 @@
+Polimorphism:
+    - Polimorphism can happen when there is more than one object. There is no Polimorphism if there is only object. 
+
+OOP Languages: You use classes.
+Procedural Languages: 
+
+Functional Programming: alonzo church is the person known as grandpa of functional programming. He is the person found Lambda calculus. 
+    In math there is a concept of function:
+            f(x) -> x * x 
+    In JS:  var f = (x) => x * x;
+
+        // Idempotent -> same input will give same output
+        let total = 0;
+        function accumulate(num) { // Not Idempotent
+            return total+= num;
+        }
+
+        // Pure function: maintains Idempotency
+        function accumulate(total, num) {
+            return total + num;
+        }
+
+        let num = 5;
+
+        // Is is easier to test and maintain pure function
+
+        HIGHER ORDER FUNCTIONS
+        - Functions take another function as parameter or return another function as parameter.
+
+        Quote: 
+        - If you do OOP do not use switch statement.
+        - If you use functional programming, do not use for, while etc. 
+
+RECURSION:
+ - Recursion is a functions calls itself.
