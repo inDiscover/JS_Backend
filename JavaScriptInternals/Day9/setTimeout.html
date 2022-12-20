@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Single Threaded Example</title>
+    <!-- There is no way  to run 2 functions at the same time in JavaScript -->
+    <!-- The code below proves this, when frozen button is clicked, then the while loop works and this stops all other interaction on UI -->
+    <!-- So JS can not run run 2 code simultaneously, because it is a single threaded language -->
+    <script>
+
+      function longRun(ms) {
+        const start = new Date();
+        while (new Date() - start < ms); // this is a JS code, so while it is running it does not allow anything else to run. setTimeout is not like that because it is not part of JS, but WebApi which means when you run setTimeout, you can still run other JS code.
+      }
+
+      // Compare this function with timeOut function.
+      // This function is JS not WebApi, it blocks the execution of the other functions.
+      // The other functions are not allowed to execute and not even postponed.
+      function frozen() {
+        console.log("Frozen start");
+        longRun(5000);
+        console.log("Frozen end");
+      }
+
+      // the function below postpone the actions made by longRun, 5 sec after it has been clicked for 5 sec.
+      // During setTimeout execution, up and down button does not respond but your clicks are stored and reflected after setTimeout() is done with its work.
+      function timeOut() {
+        console.log("timeout start");
+        setTimeout(longRun, 5000, 10000);
+        console.log("timeout end");
+      }
+    </script>
+  </head>
+  <body>
+    <input type="number" />
+    <button onclick="frozen()">Frozen</button>
+    <button onclick="timeOut()">Timeout</button>
+  </body>
+</html>
+
+<!-- setTimeout(functionRef, 0) This lets the browser know that the functionRef will be executed after browser is done with its stuff. It will not delay but just wait browser-->

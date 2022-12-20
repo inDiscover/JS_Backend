@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Single Threaded Example</title>
+    <script>
+      function longRun(ms) {
+        const start = new Date(); // Date can be used without paranthesis since there is no argument to pass.
+        while (new Date() - start < ms);
+      }
+
+      function frozen() {
+        console.log("Frozen start");
+        longRun(5000);
+        console.log("Frozen end");
+      }
+
+      function timeOut() {
+        console.log("timeOut start");
+        setTimeout(longRun, 5000, 10000); // longRun() function can be put here without paranthesis, the difference is, if there is no paranthesis, setTimeout() will call it itself when needed. So we are not executing the function but just giving reference to the function instead.
+      }
+
+      function executor(resolve, reject) {
+        resolve("Done");
+      }
+
+      function promiseFn() {
+        const pakka = new Promise(executor);
+        pakka.then((result) => {
+          longRun(10000);
+          console.log(result);
+        });
+      }
+
+      function multiThreaded() { 
+        const worker = new Worker("worker.js"); // browser usess Worker(), node uses workerThread() so they are not the same
+        worker.onmessage = function (message) {
+          console.log("worker says", message);
+          document.getElementById("input").value = 3.14;
+        };
+        worker.postMessage(10000);
+      }
+    </script>
+  </head>
+  <body>
+    <input type="number" />
+    <button onclick="frozen()">Frozen</button>
+    <button onclick="timeOut()">Timeout</button>
+    <button onclick="promiseFn()">Promise</button>
+    <button onclick="multiThreaded()">Multi Threaded</button>
+  </body>
+</html>
