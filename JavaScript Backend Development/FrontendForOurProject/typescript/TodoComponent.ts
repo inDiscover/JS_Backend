@@ -1,7 +1,9 @@
 import { Todo } from "./TodoModel";
+import { TodoService } from "./TodoService";
 
 export class TodoComponent {
   private todoList: Todo[] = [];
+  todoService = new TodoService();
 
   constructor(selector: string) {
     const template = `
@@ -23,14 +25,21 @@ export class TodoComponent {
     const todoInput = document.querySelector("#todo-input") as HTMLInputElement;
     const itemList = document.querySelector("#item-list") as HTMLUListElement;
 
-    // Read back from localstorage 
-    this.todoList = JSON.parse(localStorage.getItem("todolist") ?? "[]");
+    // Read back from localstorage
+    // this.todoList = JSON.parse(localStorage.getItem("todolist") ?? "[]");
+    this.todoList = this.todoService.getAllTodos();
+    this.todoList.forEach((todo: Todo) => {
+      const item = `<li>${todo.todoItem}</li>`;
+      itemList.insertAdjacentHTML("beforeend", item);
+    });
+
     console.log(this.todoList);
 
     //* Dynamic add using button click
     addButton.addEventListener("click", () => {
       //* Capture the todo text, create a Todo object and add to todoList
-      const todo = new Todo(todoInput?.value);
+      // const todo = new Todo(todoInput?.value);
+      const todo = this.todoService.createTodo(todoInput?.value);
       this.todoList.push(todo);
 
       //? Prepare the li element
@@ -45,7 +54,7 @@ export class TodoComponent {
       console.log(this.todoList);
 
       // Write the data to local storage
-      localStorage.setItem("todolist", JSON.stringify(this.todoList));
+      // localStorage.setItem("todolist", JSON.stringify(this.todoList));
     });
   }
 }
