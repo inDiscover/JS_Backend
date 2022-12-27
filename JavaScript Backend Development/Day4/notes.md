@@ -1,1 +1,1 @@
-Webpack birden fazla .js file alip tek paket haline getirir. Cunku browser bnunu yapamaz, yani bundle etme gorevi vardir bu kadar.
+Webpack takes .js files and convert them into one package. Browser can not do this. So webpack just bundles the files.
