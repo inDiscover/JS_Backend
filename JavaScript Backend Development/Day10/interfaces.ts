@@ -1,3 +1,4 @@
+//~* Class is the identity (implementation)
 class Animal {
   eat() {
     console.log("Chomp! chomp!");
@@ -10,7 +11,7 @@ class Human extends Animal {
   //* Automatically inherits Animal features
 }
 
-//! Interface is CONTRACT, what we must achieve ourselves
+//~! Interface is CONTRACT, what we must achieve ourselves
 
 interface Engineer {
   passBEExam(): void; // There is no implementation
