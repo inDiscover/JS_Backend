@@ -1,8 +1,8 @@
 "use strict";
 // const TodoComponent = require("./TodoComponent");
-Object.defineProperty(exports, "__esModule", { value: true });
-const TodoComponent_1 = require("./TodoComponent");
+exports.__esModule = true;
+var TodoComponent_1 = require("./TodoComponent");
 //* Execute only after the HTML is parsed and DOM tree is ready...
-document.addEventListener("DOMContentLoaded", () => {
-    const todoComponent = new TodoComponent_1.TodoComponent("app-todo");
+document.addEventListener("DOMContentLoaded", function () {
+    var todoComponent = new TodoComponent_1.TodoComponent("app-todo");
 });

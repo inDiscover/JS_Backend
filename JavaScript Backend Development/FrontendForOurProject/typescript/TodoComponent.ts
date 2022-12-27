@@ -20,32 +20,16 @@ export class TodoComponent {
     this.todoInput = document.querySelector("#todo-input") as HTMLInputElement;
     this.itemList = document.querySelector("#item-list") as HTMLUListElement;
 
-    // Read back from localstorage
-    // this.todoList = JSON.parse(localStorage.getItem("todolist") ?? "[]");
-    this.todoList = this.todoService.getAllTodos();
-    this.todoList.forEach((todo: Todo) => {
-      const item = `<li>${todo.todoItem}</li>`;
-      this.itemList.insertAdjacentHTML("beforeend", item);
-    });
-
-    console.log(this.todoList);
-
     //* Dynamic add using button click
     addButton?.addEventListener("click", () => {
       this.renderTodo(this.todoService.createTodo(this.todoInput?.value));
-      this.todoInput.value = "";
-      //* Capture the todo text, create a Todo object and add to todoList
-      // const todo = new Todo(todoInput?.value);
-      const todo = this.todoService.createTodo(this.todoInput?.value);
-      this.todoList.push(todo);
 
       //? Make input null again
       this.todoInput.value = "";
+    });
 
-      console.log(this.todoList);
-
-      // Write the data to local storage
-      // localStorage.setItem("todolist", JSON.stringify(this.todoList));
+    this.todoService.getAllTodos().forEach((todo: Todo) => {
+      this.renderTodo(todo);
     });
   }
 
@@ -70,11 +54,11 @@ export class TodoComponent {
     border:none;
     `;
 
-    //? Prepare the li element
+    //? Prepare the li element and add it
     const item = `<li id="todo-${todo.todoKey}">
                     ${todo.todoItem}
                       <button style='${buttonStyle}'>X</button>
-                    </li>`;
+                  </li>`;
 
     //? Add it
     this.itemList.insertAdjacentHTML("beforeend", item);
