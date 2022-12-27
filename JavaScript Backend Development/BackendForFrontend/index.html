@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Document</title>
+    <script>
+      function makeCall() {
+        // AJAX Object (part of the browser WebAPI)
+        const xhr = new XMLHttpRequest();
+        xhr.open("GET", "https://localhost:10000"); // If http is used instead of https, then CORS error will be thrown
+
+        xhr.onreadystatechange = function (event) {
+          console.log(xhr.response);
+        };
+
+        // Actually make the call
+        xhr.send();
+      }
+    </script>
+  </head>
+  <body>
+    <button onclick="makeCall()">Fetch Data</button>
+  </body>
+</html>
