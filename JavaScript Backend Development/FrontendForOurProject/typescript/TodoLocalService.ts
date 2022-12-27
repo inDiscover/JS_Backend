@@ -14,6 +14,8 @@ export class TodoLocalService implements ITodoService {
   async init() {
     const list = await this.getAllTodos();
     Todo.lastKey = list.at(-1)?.todoKey ?? 0;
+    // The code above means that if last index of list has todoKey value, assign it to Todo.lastKey, if not assign 0
+    // at(-1): last index, ??: Nullish coalescing operator, checks if the left part is either null or undefined, it does not treat falsy values as false like ||
   }
 
   //~? Crud
